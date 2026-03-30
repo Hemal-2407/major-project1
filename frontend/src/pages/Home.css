@@ -1,0 +1,59 @@
+
+
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:#f8f9fb;color:#333}
+
+/* Header */
+.header{display:flex;justify-content:space-between;align-items:center;padding:18px 50px;background:#ffffff;box-shadow:0 4px 15px rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+.logo{font-size:24px;font-weight:600;color:#2c3e50}
+nav a{margin:0 15px;text-decoration:none;color:#555;font-weight:500;position:relative}
+nav a::after{content:'';position:absolute;width:0;height:2px;left:0;bottom:-4px;background:#ff6b6b;transition:0.3s}
+nav a:hover::after{width:100%}
+nav a:hover{color:#000}
+
+/* Hero */
+.hero{height:90vh;background:url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7') center/cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff}
+.hero h1{font-size:50px;margin-bottom:20px;animation:fadeDown 1s ease}
+.hero p{font-size:18px;margin-bottom:25px;animation:fadeUp 1s ease}
+.hero button{padding:12px 28px;border:none;border-radius:30px;background:#ff6b6b;color:#fff;font-size:16px;cursor:pointer;transition:0.3s}
+.hero button:hover{background:#ff4757;transform:scale(1.05)}
+
+/* Sections */
+.section{padding:70px 50px}
+.section h2{text-align:center;margin-bottom:40px;font-size:28px}
+
+/* Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+
+/* Card */
+.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.05);transition:0.4s}
+.card:hover{transform:translateY(-12px);box-shadow:0 15px 35px rgba(0,0,0,0.1)}
+.card img{width:100%;height:200px;object-fit:cover}
+.card h3{padding:15px;font-size:18px}
+.card p{padding:0 15px 15px;color:#777}
+.card button{margin:15px;border:none;background:#2ed573;color:#fff;padding:10px;border-radius:25px;width:calc(100% - 30px);cursor:pointer;transition:0.3s}
+.card button:hover{background:#1dd1a1}
+
+/* Trust Section */
+.trust{display:flex;justify-content:space-around;flex-wrap:wrap;gap:20px;text-align:center}
+.trust div{padding:25px;background:#fff;border-radius:15px;box-shadow:0 8px 20px rgba(0,0,0,0.05);transition:0.3s}
+.trust div:hover{transform:translateY(-8px)}
+
+/* Footer */
+footer{background:#2c3e50;color:#fff;text-align:center;padding:25px;margin-top:40px}
+
+/* Animations */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+
+/* Responsive */
+@media(max-width:768px){
+  .header{padding:15px 20px}
+  nav a{margin:0 8px;font-size:14px}
+  .hero h1{font-size:32px}
+  .section{padding:50px 20px}
+}
+/* ===================== End CSS ===================== */
+
+
