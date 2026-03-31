@@ -13,9 +13,9 @@ nav a:hover::after{width:100%}
 nav a:hover{color:#000}
 
 /* Hero */
-.hero{height:90vh;background:url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7') center/cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff}
-.hero h1{font-size:50px;margin-bottom:20px;animation:fadeDown 1s ease}
-.hero p{font-size:18px;margin-bottom:25px;animation:fadeUp 1s ease}
+.hero{height:90vh;background:url('https://www.taasaupvcprofile.com/sub-images/products_specification.jpg') center/cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff}
+.hero h1{font-size:50px;margin-bottom:20px;color:white;animation:fadeDown 1s ease}
+.hero p{font-size:18px;margin-bottom:25px;color:black;animation:fadeUp 1s ease}
 .hero button{padding:12px 28px;border:none;border-radius:30px;background:#ff6b6b;color:#fff;font-size:16px;cursor:pointer;transition:0.3s}
 .hero button:hover{background:#ff4757;transform:scale(1.05)}
 
