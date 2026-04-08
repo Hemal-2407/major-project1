@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 // Swapped Instagram/Facebook for Globe and Share2 to avoid the Import Error
 import { Mail, Phone, MapPin, Globe, Share2, ArrowUpRight } from "lucide-react";
@@ -97,3 +98,40 @@ const Footer = () => {
 };
 
 export default Footer;
+=======
+import "./Footer.css";
+
+export default function Footer() {
+  return (
+    <footer className="footer">
+      <div className="footer-container">
+        
+        <div>
+          <h3>FurniShop</h3>
+          <p>Modern furniture & UPVC solutions for your home.</p>
+        </div>
+
+        <div>
+          <h4>Quick Links</h4>
+          <p>Home</p>
+          <p>About</p>
+          <p>Products</p>
+          <p>Contact</p>
+        </div>
+
+        <div>
+          <h4>Contact</h4>
+          <p>📍 Ahmedabad, India</p>
+          <p>📞 +91 9876543210</p>
+          <p>📧 info@furnishop.com</p>
+        </div>
+
+      </div>
+
+      <p className="copyright">
+        © 2026 FurniShop | All Rights Reserved
+      </p>
+    </footer>
+  );
+}
+>>>>>>> b87ef352ecc7bd63f58b6048580306717e0d227a
