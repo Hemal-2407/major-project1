@@ -11,24 +11,35 @@ export default function Contact() {
         <p>We would love to hear from you. Get in touch with us!</p>
       </div>
 
-      {/* Main Section */}
-      <div className="contact-container">
+      <div className="contact-info">
+  <h2 className="info-title">Get in Touch</h2>
 
-        {/* Left - Contact Info */}
-        <div className="contact-info">
-          <h2>Get in Touch</h2>
+  <div className="info-item">
+    <span className="icon">📍</span>
+    <p><strong>Address:</strong> Ahmedabad, Gujarat, India</p>
+  </div>
 
-          <p><strong>Address:</strong>06-Bileshwar industrial Estate,Opp. G.V.M.M., nr.Octroi Naka,Odhav,Ahemdabad-382415.</p>
-          <p><strong>Phone:</strong> +91 98765 43210</p>
-          <p><strong>Email:</strong> info@taasaupvsprofile.com</p>
-          <p><strong>Working Hours:</strong> Mon - Sat (9 AM - 6 PM)</p>
+  <div className="info-item">
+    <span className="icon">📞</span>
+    <p><strong>Phone:</strong> +91 98765 43210</p>
+  </div>
 
-          <div className="socials">
-            <span>🌐</span>
-            <span>📘</span>
-            <span>📷</span>
-          </div>
-        </div>
+  <div className="info-item">
+    <span className="icon">✉️</span>
+    <p><strong>Email:</strong> support@yourstore.com</p>
+  </div>
+
+  <div className="info-item">
+    <span className="icon">⏰</span>
+    <p><strong>Working Hours:</strong> Mon - Sat (9 AM - 6 PM)</p>
+  </div>
+
+  <div className="socials">
+    <span>🌐</span>
+    <span>📘</span>
+    <span>📷</span>
+  </div>
+</div>
 
         {/* Right - Form */}
         <div className="contact-form">
@@ -37,7 +48,7 @@ export default function Contact() {
           <form>
             <input type="text" placeholder="Your Name" required />
             <input type="email" placeholder="Your Email" required />
-                   <input type="number" placeholder="Phone number" required />
+            <input type="number" placeholder="Phone number" required />
             <input type="text" placeholder="Subject" />
             <textarea placeholder="Your Message" rows="5"></textarea>
 

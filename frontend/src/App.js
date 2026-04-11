@@ -7,11 +7,16 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import About from "./pages/About";
-import Login from "./pages/admin/Login"; // New: Import your login page
+//import Login from "./pages/admin/Login"; // New: Import your login page
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminProductList from "./pages/AdminProductList";
 import CategoryManager from "./pages/CategoryManager";
 import AdminSurveyManager from "./pages/AdminSurveyManager";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+
 
 // --- PROTECTED ROUTE COMPONENT ---
 const ProtectedRoute = ({ children }) => {
@@ -38,6 +43,9 @@ function App() {
                   <Route path="/product/:id" element={<ProductDetails />} />
                   {/* Public Login Route */}
                   <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/forgot-password" element={<ForgotPassword />} />
+                  <Route path="/reset-password/:token" element={<ResetPassword />} />
                 </Routes>
               </div>
               <Footer />

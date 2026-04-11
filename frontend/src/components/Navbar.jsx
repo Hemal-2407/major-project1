@@ -25,7 +25,7 @@ const Navbar = () => {
 
         {/* Desktop Menu - Focused on Customers */}
         <ul className="hidden md:flex items-center space-x-10">
-          {["Home", "About", "Products", "Contact"].map((item) => (
+          {["Home", "About", "Products", "Contact","Login"].map((item) => (
             <li key={item}>
               <Link 
                 to={item === "Home" ? "/" : `/${item.toLowerCase()}`} 

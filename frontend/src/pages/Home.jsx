@@ -116,6 +116,7 @@ const Home = () => {
       <section className="py-24 px-6 bg-white">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 max-w-7xl mx-auto">
           <div>
+            
             <span className="text-amber-600 font-bold text-xs uppercase tracking-widest">Our Work</span>
             <h2 className="text-4xl md:text-5xl font-serif mt-2 text-slate-900">Curated Collections</h2>
           </div>

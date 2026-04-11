@@ -1,31 +1,31 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
+// import Home from "./pages/Home";
+// import About from "./pages/About";
+// import Contact from "./pages/Contact";
 
 // (Optional pages - create later if needed)
 // import Shop from "./pages/Shop";
 // import Contact from "./pages/Contact";
 
-export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        {/* Home Page */}
-        <Route path="/" element={<Home />} />
+// export default function App() {
+//   return (
+//     <BrowserRouter>
+//       <Routes>
+//         {/* Home Page */}
+//         <Route path="/" element={<Home />} />
 
-        {/* About Page */}
-        <Route path="/about" element={<About />} />
+//         {/* About Page */}
+//         <Route path="/about" element={<About />} />
 
-        {/* Future Pages */}
-        {/* <Route path="/shop" element={<Shop />} /> */}
-         <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
+//         {/* Future Pages */}
+//         {/* <Route path="/shop" element={<Shop />} /> */}
+//          <Route path="/contact" element={<Contact />} />
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// }
 // import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from './assets/vite.svg'
