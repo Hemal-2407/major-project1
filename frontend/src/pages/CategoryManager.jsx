@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { 
-  Plus, Folder, FolderTree, Trash2, Edit3, X, Save, Loader2, 
+  Plus, Folder, Trash2, Edit3, Save, Loader2, 
   Layers, ChevronRight, Hash 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";

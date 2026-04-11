@@ -9,7 +9,7 @@ import {
   Trash2, 
   CheckCircle,
   Clock,
-  Filter
+  // Filter
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
