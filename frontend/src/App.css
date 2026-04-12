@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+.productThumbs .swiper-slide-thumb-active .thumb-card {
+  border-color: #c49138 !important;
+  box-shadow: 0 4px 15px rgba(196, 145, 56, 0.3);
+  transform: scale(1.02);
+}
+
+.mainProductSwiper {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* For mobile horizontal layout */
+@media (max-width: 991px) {
+  .productThumbs {
+    height: auto !important;
+    margin-top: 2rem;
+  }
+}

@@ -8,6 +8,85 @@ const crypto = require("crypto");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 
+//get all user
+router.get("/users", async (req, res) => {
+  try {
+    const users = await User.find().select("-password");
+
+    res.setHeader("Content-Type", "application/json");
+    res.send(JSON.stringify(users, null, 2)); // 🔥 formatting
+
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+///get single user
+router.get("/users/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+//update
+router.put("/users/:id", async (req, res) => {
+  try {
+    const { name, contact } = req.body;
+
+    let updateData = {};
+
+    if (name) updateData.name = name;
+
+    if (contact) {
+      if (contact.includes("@")) {
+        updateData.email = contact;
+        updateData.phone = null;
+      } else {
+        updateData.phone = contact;
+        updateData.email = null;
+      }
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true }
+    ).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "User updated", user });
+
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+//delete
+router.delete("/users/:id", async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "User deleted successfully" });
+
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 // ================= REGISTER =================
 router.post("/register", async (req, res) => {
@@ -20,8 +99,7 @@ router.post("/register", async (req, res) => {
 
     let email = null;
     let phone = null;
-
-    if (validator.isEmail(contact)) {
+   if (validator.isEmail(contact)) {
       email = contact.toLowerCase().trim();
     } else if (validator.isMobilePhone(contact, "any")) {
       phone = contact.trim();
@@ -51,8 +129,34 @@ router.post("/register", async (req, res) => {
     });
 
     await user.save();
+// ================= SEND EMAIL =================
+    if (email) {
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
 
-    res.json({ message: "Registered Successfully" });
+      await transporter.sendMail({
+        from: `"Taasa uPVC" <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: "Welcome to Taasa uPVC 🎉",
+        html: `
+          <div style="font-family:sans-serif;">
+            <h2 style="color:#f59e0b;">Welcome ${name} 👋</h2>
+            <p>Thank you for registering at <b>Taasa uPVC</b>.</p>
+            <p>Your account has been created successfully.</p>
+            <br/>
+            <p>We are excited to have you with us!</p>
+          </div>
+        `,
+      });
+    }
+
+
+    res.json({ message: "Registered Successfully & Email sent" });
 
   } catch (err) {
     console.log(err);
@@ -169,69 +273,75 @@ router.post("/forgot-password", async (req, res) => {
   try {
     let { contact } = req.body;
 
-    const user = await User.findOne({ email: contact });
+    contact = contact.toLowerCase().trim();
+
+    const user = await User.findOne({
+      $or: [{ email: contact }, { phone: contact }]
+    });
 
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
 
-    const crypto = require("crypto");
-    const token = crypto.randomBytes(32).toString("hex");
+    const token = require("crypto").randomBytes(32).toString("hex");
 
+    // 🔥 IMPORTANT: overwrite token
     user.resetToken = token;
-    user.resetTokenExpire = Date.now() + 10 * 60 * 1000;
+    user.resetTokenExpire = Date.now() + 60 * 60 * 1000; // 1 hour
 
     await user.save();
 
-    const resetLink = `http://localhost:3000/reset-password/${token}`;
+    console.log("TOKEN SAVED:", token);
 
-    console.log("RESET LINK:", resetLink); // DEBUG
+    const link = `http://localhost:3000/reset-password/${token}`;
 
-    res.json({
-      message: "Reset link generated",
-      link: resetLink
-    });
+    res.json({ link });
 
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Server Error" });
+    res.status(500).json({ message: "Server error" });
   }
 });
-
 // ================= RESET PASSWORD =================
 router.post("/reset-password/:token", async (req, res) => {
   try {
-    const { token } = req.params;
+    const token = req.params.token;
     const { password } = req.body;
 
-    if (!password) {
-      return res.status(400).json({ message: "Password required" });
-    }
+    console.log("TOKEN FROM URL:", token);
 
     const user = await User.findOne({
-      resetToken: token,
-      resetTokenExpire: { $gt: Date.now() },
+      resetToken: token
     });
+
+    console.log("USER FOUND:", user);
 
     if (!user) {
       return res.status(400).json({
-        message: "Invalid or expired token",
+        message: "Invalid token"
       });
     }
 
+    // ❗ check expiry separately
+    if (user.resetTokenExpire < Date.now()) {
+      return res.status(400).json({
+        message: "Token expired"
+      });
+    }
+
+    const bcrypt = require("bcryptjs");
     const hashed = await bcrypt.hash(password, 10);
 
     user.password = hashed;
-    user.resetToken = undefined;
-    user.resetTokenExpire = undefined;
+    user.resetToken = null;
+    user.resetTokenExpire = null;
 
     await user.save();
 
-    res.json({ message: "Password reset successful" });
+    res.json({ message: "Password updated successfully" });
 
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Server Error" });
+    res.status(500).json({ message: "Server error" });
   }
 });
 module.exports = router;

@@ -8,6 +8,10 @@ import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import About from "./pages/About";
 //import Login from "./pages/admin/Login"; // New: Import your login page
+import PlatinumCollection from "./pages/PlatinumCollection";
+import UPVDoors from "./pages/UPVDoors";
+//import Login from "./pages/admin/Login"; // New: Import your login page
+
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminProductList from "./pages/AdminProductList";
 import CategoryManager from "./pages/CategoryManager";
@@ -16,6 +20,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+// import HollowDoors from "./pages/HollowDoors";
+// import { CategoryProvider, useCategories } from "./context/CategoryContext";
+// import CategoryPage     from "./pages/CategoryPage";
 
 
 // --- PROTECTED ROUTE COMPONENT ---
@@ -25,8 +32,26 @@ const ProtectedRoute = ({ children }) => {
   return token ? children : <Navigate to="/login" replace />;
 };
 
+// const DynamicCategoryRoutes = () => {
+//   const { categories } = useCategories();
+
+//   return (
+//     <>
+//       {categories.map(category => (
+//         <Route
+//           key={category.slug}
+//           path={`/products/${category.slug}`}
+//           element={<CategoryPage categorySlug={category.slug} />}
+//         />
+//       ))}
+//     </>
+//   );
+// };
+
+
 function App() {
   return (
+    // <CategoryProvider>
     <Router>
       <Routes>
         {/* --- PUBLIC ROUTES (With Navbar & Footer) --- */}
@@ -41,6 +66,20 @@ function App() {
                   <Route path="/about" element={<About />} />
                   <Route path="/products" element={<Products />} />
                   <Route path="/product/:id" element={<ProductDetails />} />
+                  <Route path="/PlatinumCollection" element={<PlatinumCollection />} />
+                  <Route path="/doors" element={<UPVDoors/>}/>
+                  {/* <Route path="hollowdoor" element={<HollowDoors/>}/> */}
+                  {/* <DynamicCategoryRoutes /> */}
+
+                  {/* ── Old URLs redirect to new structure ── */}
+                  {/* <Route path="/platinum-collection" element={<Navigate to="/products/platinum-collection" replace />} />
+                  <Route path="/regular-collection"  element={<Navigate to="/products/regular-collection"  replace />} />
+                  <Route path="/wpc-pvc-louvers"     element={<Navigate to="/products/wpc-pvc-louvers"     replace />} /> */}
+
+                  
+                  
+          {/* ── 404 ── */}
+          <Route path="*" element={<Navigate to="/" replace />} />
                   {/* Public Login Route */}
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
@@ -74,6 +113,7 @@ function App() {
         />
       </Routes>
     </Router>
+  //   </CategoryProvider>
   );
 }
 

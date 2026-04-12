@@ -3,7 +3,7 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductForm from "../components/admin/ProductForm";
 import ProductTable from "../components/admin/ProductTable";
-import { PlusCircle, Package, Database, Activity } from "lucide-react";
+import { PlusCircle,  Database, Activity } from "lucide-react";
 
 const AdminDashboard = () => {
     const [products, setProducts] = useState([]);
